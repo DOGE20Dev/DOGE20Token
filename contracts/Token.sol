@@ -222,18 +222,21 @@ contract Dogecoin20Token is Context, IERC20Metadata, Ownable {
     string private _name;
     string private _symbol;
     uint8 private constant _decimals = 18;
-    uint256 public constant hardCap = 140_000_000_000 * (10 ** _decimals); //140 billion
+    uint256 public constant presaleReserve = 84_000_000_000 * (10 ** _decimals); //84 billion
+    uint256 public constant stakingReserve = 42_000_000_000 * (10 ** _decimals); //42 billion
+    uint256 public constant liquidityReserve = 14_000_000_000 * (10 ** _decimals); //14 billion
 
     /**
      * @dev Contract constructor.
      * @param name_ The name of the token.
      * @param symbol_ The symbol of the token.
-     * @param _to The initial address to mint the total supply to.
      */
-    constructor(string memory name_, string memory symbol_, address _to) {
+    constructor(string memory name_, string memory symbol_) {
         _name = name_;
         _symbol = symbol_;
-        _mint(_to, hardCap);
+        _mint(0x23354f8206Ad999F8701B90fEb990ea292279481, presaleReserve);
+        _mint(0xc871515c4CdCbeF827a301F85C7Bd292b7D14745, stakingReserve);
+        _mint(0xD9079F4e2bc11c3F84b14aC1A491c0c3756FE9Ea, liquidityReserve);
     }
 
     /**
